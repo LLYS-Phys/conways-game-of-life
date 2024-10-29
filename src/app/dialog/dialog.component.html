@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Change setings for the game:</h2>
+<mat-dialog-content>
+    <form [formGroup]="canvasSettings" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+            <mat-label>Canvas Width</mat-label>
+            <input type="number" matInput formControlName="canvasWidth">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Canvas Height</mat-label>
+            <input type="number" matInput formControlName="canvasHeight">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Cell Size</mat-label>
+            <input type="number" matInput formControlName="cellSize">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Cell Color</mat-label>
+            <input type="color" id="colorInput" matInput formControlName="cellColor">
+        </mat-form-field>
+        <mat-dialog-actions>
+            <button mat-button type="button" mat-dialog-close>Cancel</button>
+            <button mat-flat-button>Save</button>
+        </mat-dialog-actions>
+    </form>
+</mat-dialog-content>

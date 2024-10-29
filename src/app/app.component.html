@@ -1,5 +1,5 @@
 <section class="canvas-container">
-  <canvas id="gameCanvas"  width="1200" height="800"></canvas>
+  <canvas id="gameCanvas"></canvas>
 </section>
 <section class="buttons-container">
   <button mat-fab extended (click)="start()">
@@ -19,13 +19,3 @@
     Settings
   </button>
 </section>
-@if ( settingsOpen ) {
-  <section class="settings-container">
-    settings
-
-    change cell size
-    change cell color
-    change canvas width
-    change canvas height
-  </section>
-}
