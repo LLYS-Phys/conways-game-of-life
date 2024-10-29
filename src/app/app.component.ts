@@ -32,13 +32,13 @@ export class AppComponent implements OnInit {
       this.canvas.width = Number(localStorage.getItem("canvasWidth")) <= screen.width ? Number(localStorage.getItem("canvasWidth")) : screen.width-32
     } else { 
       this.canvas.width = screen.width-32
-      localStorage.setItem("canvasWidth", "1200")
+      localStorage.setItem("canvasWidth", (screen.width-32).toString())
     }
     if (localStorage.getItem("canvasHeight")) {
       this.canvas.height = Number(localStorage.getItem("canvasHeight"))
     } else {
       this.canvas.height = screen.height/2
-      localStorage.setItem("canvasHeight", "800")
+      localStorage.setItem("canvasHeight", (screen.height/2).toString())
     }
     if (localStorage.getItem("cellSize")) {
       this.cellSize = Number(localStorage.getItem("cellSize"))    
