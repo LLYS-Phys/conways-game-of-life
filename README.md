@@ -1,4 +1,6 @@
-# ConwaysGameOfLife
+# Conways Game Of Life
+
+A simple representation of [Conway's Game Of Life]([url](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life))
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.5.
 
