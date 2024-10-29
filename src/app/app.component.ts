@@ -26,17 +26,18 @@ export class AppComponent implements OnInit {
   grid: number[][] = []
 
   ngOnInit() {
+    console.log(screen.width)
     this.canvas = <HTMLCanvasElement>document.getElementById('gameCanvas');
     if (localStorage.getItem("canvasWidth")) {
-      this.canvas.width = Number(localStorage.getItem("canvasWidth"))
+      this.canvas.width = Number(localStorage.getItem("canvasWidth")) <= screen.width ? Number(localStorage.getItem("canvasWidth")) : screen.width-32
     } else { 
-      this.canvas.width = 1200 
+      this.canvas.width = screen.width-32
       localStorage.setItem("canvasWidth", "1200")
     }
     if (localStorage.getItem("canvasHeight")) {
       this.canvas.height = Number(localStorage.getItem("canvasHeight"))
     } else {
-      this.canvas.height = 800
+      this.canvas.height = screen.height/2
       localStorage.setItem("canvasHeight", "800")
     }
     if (localStorage.getItem("cellSize")) {
