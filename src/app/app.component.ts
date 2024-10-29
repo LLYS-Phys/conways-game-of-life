@@ -22,11 +22,11 @@ export class AppComponent implements OnInit {
   cellSize = 10
   numRows: number | null = null
   numCols: number | null = null
-  grid: number[][] | null = null
+  grid: number[][] | null = []
 
   ngOnInit() {
     this.canvas = <HTMLCanvasElement>document.getElementById('gameCanvas');
-    this.ctx = <CanvasRenderingContext2D>this.canvas.getContext('2d');
+    this.ctx = this.canvas.getContext('2d');
     this.numRows = Math.floor(this.canvas.height / this.cellSize);
     this.numCols = Math.floor(this.canvas.width / this.cellSize);
     this.grid = this.createGrid();
@@ -34,17 +34,15 @@ export class AppComponent implements OnInit {
 
   // Function to initialize the grid
   createGrid() {
-    console.log("create grid")
-    const grid: number[][] = [];
     if (this.numRows && this.numCols){
       for (let i = 0; i < this.numRows; i++) {
-        grid[i] = [];
+        this.grid![i] = [];
         for (let j = 0; j < this.numCols; j++) {
-            grid[i][j] = Math.random() > 0.7 ? 1 : 0; // Random initialization
+            this.grid![i][j] = Math.random() > 0.7 ? 1 : 0; // Random initialization
         }
       }
     }
-    return grid;
+    return this.grid;
   }
 
   // Function to draw the grid
