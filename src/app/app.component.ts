@@ -15,15 +15,15 @@ import { Dialog } from './dialog/dialog.component';
 export class AppComponent implements OnInit {
   readonly dialog = inject(MatDialog);
 
-  cellSize = 0
-  cellColor = 'black'
-  isRunning = false;
+  cellSize: number = 0
+  cellColor: string = 'black'
+  isRunning: boolean = false;
   animationId: number | null = null;
   canvas: HTMLCanvasElement | null = null
   ctx: CanvasRenderingContext2D | null = null
   numRows: number | null = null
   numCols: number | null = null
-  grid: number[][] | null = []
+  grid: number[][] = []
 
   ngOnInit() {
     this.canvas = <HTMLCanvasElement>document.getElementById('gameCanvas');
@@ -57,20 +57,18 @@ export class AppComponent implements OnInit {
     this.grid = this.createGrid();
   }
 
-  // Function to initialize the grid
   createGrid() {
     if (this.numRows && this.numCols){
       for (let i = 0; i < this.numRows; i++) {
         this.grid![i] = [];
         for (let j = 0; j < this.numCols; j++) {
-            this.grid![i][j] = Math.random() > 0.7 ? 1 : 0; // Random initialization
+            this.grid![i][j] = Math.random() > 0.7 ? 1 : 0;
         }
       }
     }
     return this.grid;
   }
 
-  // Function to draw the grid
   drawGrid() {
     this.ctx!.clearRect(0, 0, this.canvas!.width, this.canvas!.height);
     for (let i = 0; i < this.numRows!; i++) {
@@ -83,7 +81,6 @@ export class AppComponent implements OnInit {
     }
   }
 
-  // Function to update the grid based on Conway's rules
   updateGrid() {
     const newGrid: number[][] = [];
     for (let i = 0; i < this.numRows!; i++) {
@@ -102,7 +99,6 @@ export class AppComponent implements OnInit {
     this.grid = newGrid;
   }
 
-  // Function to count live neighbors of a cell
   countNeighbors(row: number, col: number) {
     let count = 0;
     for (let i = -1; i <= 1; i++) {
@@ -118,7 +114,6 @@ export class AppComponent implements OnInit {
     return count;
   }
 
-  // Main loop to update and draw the grid
   mainLoop = () => {
       this.updateGrid();
       this.drawGrid();
@@ -142,7 +137,7 @@ export class AppComponent implements OnInit {
     this.drawGrid();
   }
 
-  settings() {
+  openSettings() {
     this.dialog.open(Dialog, {
       width: '30vw',
       autoFocus: false
