@@ -12,11 +12,15 @@
         canvas { 
             border: 1px solid black; 
             border-radius: 0.5rem; 
+            max-width: 100%;
         }
     }
     .buttons-container { 
         gap: 1rem; 
         margin-top: 1rem; 
+        @media screen and (max-width: 1000px) {
+            flex-direction: column;
+        }
     }
     .settings-container { 
         margin-top: 1.5rem;
