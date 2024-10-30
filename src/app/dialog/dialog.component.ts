@@ -38,9 +38,13 @@ import { MatInputModule } from '@angular/material/input';
     }
 
     onSubmit() {
-      localStorage.setItem("canvasWidth", (Number(this.canvasSettings.value.canvasWidth!) > screen.width-32 ? screen.width-32 : this.canvasSettings.value.canvasWidth!).toString())
-      localStorage.setItem("canvasHeight", this.canvasSettings.value.canvasHeight!)
-      localStorage.setItem("cellSize", this.canvasSettings.value.cellSize!)
+      localStorage.setItem("canvasWidth", (Number(this.canvasSettings.value.canvasWidth!) > screen.width-32 || Number(this.canvasSettings.value.canvasWidth!) < 1 
+                                              ? screen.width-32 
+                                              : this.canvasSettings.value.canvasWidth!).toString())
+      localStorage.setItem("canvasHeight", Number(this.canvasSettings.value.canvasHeight!) < 1 
+                                              ? (screen.height/2).toString() 
+                                              : this.canvasSettings.value.canvasHeight!)
+      localStorage.setItem("cellSize", Number(this.canvasSettings.value.cellSize!) < 1 ? "10" : this.canvasSettings.value.cellSize!)
       localStorage.setItem("cellColor", this.canvasSettings.value.cellColor!)
       localStorage.setItem("generationTimeMs", Number(this.canvasSettings.value.generationTimeMs!) < 1 ? "0" : this.canvasSettings.value.generationTimeMs!)
 
