@@ -15,6 +15,7 @@ The app has the following functionalities:
 4. Game info - the elapsed generations so far in the current game (information appear on hover or click)
 
 * All settings are saved in the local storage of the browser.
+* All settings form fields have the necessary validators added in, the fallbacks are for additional safety of the values added.
 
 ##
 
