@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   readonly dialog = inject(MatDialog);
 
   cellSize: number = 10
-  cellColor: string = 'black'
+  cellColor: string = '#000000'
   generationTimeMs: number = 0
   generationCount: number = 1
 
