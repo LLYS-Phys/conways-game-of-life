@@ -33,12 +33,16 @@ import { MatInputModule } from '@angular/material/input';
       })
     }
 
+    get buttonStatus() {
+      return this.canvasSettings.value.canvasWidth && this.canvasSettings.value.canvasHeight && this.canvasSettings.value.cellSize ? false : true
+    }
+
     onSubmit() {
       localStorage.setItem("canvasWidth", (Number(this.canvasSettings.value.canvasWidth!) > screen.width-32 ? screen.width-32 : this.canvasSettings.value.canvasWidth!).toString())
       localStorage.setItem("canvasHeight", this.canvasSettings.value.canvasHeight!)
       localStorage.setItem("cellSize", this.canvasSettings.value.cellSize!)
       localStorage.setItem("cellColor", this.canvasSettings.value.cellColor!)
-      localStorage.setItem("generationTimeMs", this.canvasSettings.value.generationTimeMs!)
+      localStorage.setItem("generationTimeMs", Number(this.canvasSettings.value.generationTimeMs!) < 1 ? "0" : this.canvasSettings.value.generationTimeMs!)
 
       this.dialogRef.close()
       location.reload()
