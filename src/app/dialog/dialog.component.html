@@ -4,14 +4,23 @@
         <mat-form-field>
             <mat-label>Canvas Width</mat-label>
             <input type="number" matInput formControlName="canvasWidth">
+            @if (this.canvasSettings.controls.canvasWidth.invalid) {
+                <mat-error>Needs to be at least 100</mat-error>
+            }
         </mat-form-field>
         <mat-form-field>
             <mat-label>Canvas Height</mat-label>
             <input type="number" matInput formControlName="canvasHeight">
+            @if (this.canvasSettings.controls.canvasHeight.invalid) {
+                <mat-error>Needs to be at least 100</mat-error>
+            }
         </mat-form-field>
         <mat-form-field>
             <mat-label>Cell Size</mat-label>
             <input type="number" matInput formControlName="cellSize">
+            @if (this.canvasSettings.controls.cellSize.invalid) {
+                <mat-error>Needs to be at least 1</mat-error>
+            }
         </mat-form-field>
         <mat-form-field>
             <mat-label>Cell Color</mat-label>
@@ -20,6 +29,9 @@
         <mat-form-field>
             <mat-label>Generation Time (ms)</mat-label>
             <input type="number" matInput formControlName="generationTimeMs">
+            @if (this.canvasSettings.controls.generationTimeMs.invalid) {
+                <mat-error>Needs to be at least 0</mat-error>
+            }
         </mat-form-field>
         <mat-dialog-actions>
             <button mat-button type="button" mat-dialog-close>Cancel</button>

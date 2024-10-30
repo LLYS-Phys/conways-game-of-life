@@ -8,7 +8,7 @@ import { Validators } from '@angular/forms';
 @Component({
     selector: 'dialog',
     templateUrl: 'dialog.component.html',
-    styleUrl: 'dialog.component.css',
+    styleUrl: 'dialog.component.scss',
     standalone: true,
     imports: [MatButtonModule, MatDialogModule, ReactiveFormsModule, MatInputModule],
     changeDetection: ChangeDetectionStrategy.OnPush,
