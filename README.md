@@ -11,7 +11,7 @@ The app has the following functionalities:
     * Canvas Height - defaults to half your screen height
     * Cell Size - defaults to 10
     * Cell Color - defaults to black
-    * Generation time in ms - defaults to 0 - maximum speed (Lifespan of each generation)
+    * Generation time in ms - defaults to 0 - maximum speed (Lifespan of each generation) (If you set it to a number less than 0, it will default back to 0)
 4. Game info - the elapsed generations so far in the current game (information appear on hover or click)
 
 * All settings are saved in the local storage of the browser.
