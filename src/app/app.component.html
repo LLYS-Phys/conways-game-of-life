@@ -2,20 +2,46 @@
   <canvas id="gameCanvas"></canvas>
 </section>
 <section class="buttons-container">
-  <button mat-fab extended (click)="start()">
+  <button 
+    mat-fab extended 
+    (click)="start()"
+    aria-label="Button to start the game"
+  >
     <mat-icon>play_arrow</mat-icon>
     Start
   </button>
-  <button mat-fab extended (click)="pause()">
+  <button 
+    mat-fab extended 
+    (click)="pause()"
+    aria-label="Button to pause the game"
+  >
     <mat-icon>pause</mat-icon>
     Pause
   </button>
-  <button mat-fab extended (click)="restart()">
+  <button 
+    mat-fab extended 
+    (click)="restart()"
+    aria-label="Button to restart the game"
+  >
     <mat-icon>replay</mat-icon>
     Restart
   </button>
-  <button mat-fab extended (click)="openSettings()">
+  <button 
+    mat-fab extended 
+    (click)="openSettings()"
+    aria-label="Button to change the game settings"
+  >
     <mat-icon>settings</mat-icon>
     Settings
+  </button>
+  <button 
+    #tooltip="matTooltip"
+    (click)="tooltip.show()"
+    mat-fab extended 
+    matTooltip="Generations Count: {{ generationCount }}"
+    aria-tooltip="Button that displays the current generation count in the game"
+  >
+    <mat-icon>information</mat-icon>
+    Game Info
   </button>
 </section>

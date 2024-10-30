@@ -2,21 +2,25 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialog, MatDialogActions, MatDialogContent } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Dialog } from './dialog/dialog.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatButtonModule, MatIconModule, MatDialogActions, MatDialogContent],
+  imports: [RouterOutlet, MatButtonModule, MatIconModule, MatTooltipModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   readonly dialog = inject(MatDialog);
 
-  cellSize: number = 0
+  cellSize: number = 10
   cellColor: string = 'black'
+  generationTimeMs: number = 0
+  generationCount: number = 0
+
   isRunning: boolean = false;
   animationId: number | null = null;
   canvas: HTMLCanvasElement | null = null
@@ -28,30 +32,21 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     console.log(screen.width)
     this.canvas = <HTMLCanvasElement>document.getElementById('gameCanvas');
-    if (localStorage.getItem("canvasWidth")) {
-      this.canvas.width = Number(localStorage.getItem("canvasWidth")) <= screen.width ? Number(localStorage.getItem("canvasWidth")) : screen.width-32
-    } else { 
-      this.canvas.width = screen.width-32
-      localStorage.setItem("canvasWidth", (screen.width-32).toString())
-    }
-    if (localStorage.getItem("canvasHeight")) {
-      this.canvas.height = Number(localStorage.getItem("canvasHeight"))
-    } else {
-      this.canvas.height = screen.height/2
-      localStorage.setItem("canvasHeight", (screen.height/2).toString())
-    }
-    if (localStorage.getItem("cellSize")) {
-      this.cellSize = Number(localStorage.getItem("cellSize"))    
-    } else {
-      this.cellSize = 10
-      localStorage.setItem("cellSize", "10")
-    }
-    if (localStorage.getItem("cellColor")) {
-      this.cellColor = localStorage.getItem("cellColor")!
-    } else {
-      this.cellColor = 'black'
-      localStorage.setItem("cellColor", "black")
-    }
+    if (!localStorage.getItem("canvasWidth")) localStorage.setItem("canvasWidth", (screen.width-32).toString())
+    this.canvas.width = Number(localStorage.getItem("canvasWidth"))
+
+    if (!localStorage.getItem("canvasHeight")) localStorage.setItem("canvasHeight", (screen.height/2).toString())
+    this.canvas.height = Number(localStorage.getItem("canvasHeight"))
+
+    if (!localStorage.getItem("cellSize")) localStorage.setItem("cellSize", this.cellSize.toString())
+    this.cellSize = Number(localStorage.getItem("cellSize"))    
+
+    if (!localStorage.getItem("cellColor")) localStorage.setItem("cellColor", this.cellColor)
+    this.cellColor = localStorage.getItem("cellColor")!
+
+    if (!localStorage.getItem("generationTimeMs")) localStorage.setItem("generationTimeMs", this.generationTimeMs.toString())
+    this.generationTimeMs = Number(localStorage.getItem("generationTimeMs"))
+    
     this.ctx = this.canvas.getContext('2d');
     this.numRows = Math.floor(this.canvas.height / this.cellSize);
     this.numCols = Math.floor(this.canvas.width / this.cellSize);
@@ -116,14 +111,21 @@ export class AppComponent implements OnInit {
   }
 
   mainLoop = () => {
-      this.updateGrid();
-      this.drawGrid();
-      this.isRunning = true;
+    console.log(this.generationCount)
+    this.updateGrid();
+    this.drawGrid();
+    setTimeout(() => {
+      this.generationCount++
       if (this.isRunning) this.animationId = requestAnimationFrame(this.mainLoop);
+    }, this.generationTimeMs);
   }
 
   start() {
-    if (!this.isRunning) this.mainLoop();
+    if (!this.isRunning) {
+      if (this.generationCount == 0) this.generationCount = 1
+      this.isRunning = true;
+      this.mainLoop();
+    }
   }
 
   pause() {
@@ -132,6 +134,7 @@ export class AppComponent implements OnInit {
   }
 
   restart() {
+    this.generationCount = 1
     this.isRunning = false;
     cancelAnimationFrame(this.animationId!)
     this.grid = this.createGrid();
