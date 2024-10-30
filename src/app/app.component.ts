@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   cellSize: number = 10
   cellColor: string = 'black'
   generationTimeMs: number = 0
-  generationCount: number = 0
+  generationCount: number = 1
 
   isRunning: boolean = false;
   animationId: number | null = null;
@@ -50,6 +50,7 @@ export class AppComponent implements OnInit {
     this.numRows = Math.floor(this.canvas.height / this.cellSize);
     this.numCols = Math.floor(this.canvas.width / this.cellSize);
     this.grid = this.createGrid();
+    this.drawGrid()
   }
 
   createGrid() {
