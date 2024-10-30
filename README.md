@@ -7,9 +7,9 @@ The app has the following functionalities:
 1. Start/Pause Game
 2. Restart Game (Generates a new game)
 3. Game Settings:
-    * Canvas Width - defaults to your screen width minus the page padding (If you set it to a number larger than your screen width, it will default to your screen width minus the padding of the page)
-    * Canvas Height - defaults to half your screen height
-    * Cell Size - defaults to 10
+    * Canvas Width - defaults to your screen width minus the page padding (If you set it to a number larger than your screen width or less than 1, it will default to your screen width minus the padding of the page)
+    * Canvas Height - defaults to half your screen height (If you set it to a number less than 1, it will defult back to half your screen height)
+    * Cell Size - defaults to 10 (If you set it to a number less than 1, it will default back to 10)
     * Cell Color - defaults to black
     * Generation time in ms - defaults to 0 - maximum speed (Lifespan of each generation) (If you set it to a number less than 0, it will default back to 0)
 4. Game info - the elapsed generations so far in the current game (information appear on hover or click)
