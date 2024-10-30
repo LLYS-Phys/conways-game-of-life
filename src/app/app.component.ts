@@ -30,7 +30,6 @@ export class AppComponent implements OnInit {
   grid: number[][] = []
 
   ngOnInit() {
-    console.log(screen.width)
     this.canvas = <HTMLCanvasElement>document.getElementById('gameCanvas');
     if (!localStorage.getItem("canvasWidth")) localStorage.setItem("canvasWidth", (screen.width-32).toString())
     this.canvas.width = Number(localStorage.getItem("canvasWidth"))
@@ -111,34 +110,33 @@ export class AppComponent implements OnInit {
   }
 
   mainLoop = () => {
-    console.log(this.generationCount)
     this.updateGrid();
     this.drawGrid();
+    this.generationCount++
     setTimeout(() => {
-      this.generationCount++
-      if (this.isRunning) this.animationId = requestAnimationFrame(this.mainLoop);
+      if (this.isRunning) {
+        this.animationId = requestAnimationFrame(this.mainLoop);
+      }
     }, this.generationTimeMs);
   }
 
-  start() {
+  start_pause() {
     if (!this.isRunning) {
-      if (this.generationCount == 0) this.generationCount = 1
       this.isRunning = true;
       this.mainLoop();
     }
-  }
-
-  pause() {
-    this.isRunning = false;
-    cancelAnimationFrame(this.animationId!)
+    else {
+      this.isRunning = false;
+      cancelAnimationFrame(this.animationId!)
+    }
   }
 
   restart() {
-    this.generationCount = 1
     this.isRunning = false;
     cancelAnimationFrame(this.animationId!)
     this.grid = this.createGrid();
     this.drawGrid();
+    this.generationCount = 1
   }
 
   openSettings() {

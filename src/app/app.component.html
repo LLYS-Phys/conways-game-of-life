@@ -4,19 +4,23 @@
 <section class="buttons-container">
   <button 
     mat-fab extended 
-    (click)="start()"
-    aria-label="Button to start the game"
+    (click)="start_pause()"
+    aria-label="Button to start/pause the game"
   >
-    <mat-icon>play_arrow</mat-icon>
-    Start
-  </button>
-  <button 
-    mat-fab extended 
-    (click)="pause()"
-    aria-label="Button to pause the game"
-  >
-    <mat-icon>pause</mat-icon>
-    Pause
+    <mat-icon>
+      @if (isRunning) {
+        pause
+      }
+      @else {
+        play_arrow
+      }
+    </mat-icon>
+    @if (isRunning) {
+      Pause
+    }
+    @else {
+      Start
+    }
   </button>
   <button 
     mat-fab extended 
